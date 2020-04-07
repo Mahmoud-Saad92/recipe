@@ -2,11 +2,11 @@ package eg.bazinga.recipe.services.recipe;
 
 import eg.bazinga.recipe.models.Recipe;
 
-import java.util.List;
+import java.util.Set;
 
 public interface RecipeService {
 
-    List<Recipe> getAllRecipes();
+    Set<Recipe> getAllRecipes();
 
-    List<Recipe> saveAllRecipes(List<Recipe> recipes);
+    Set<Recipe> saveAllRecipes(Set<Recipe> recipes);
 }

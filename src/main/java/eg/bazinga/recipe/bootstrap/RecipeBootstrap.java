@@ -12,8 +12,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -40,9 +40,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         recipeServiceImpl.saveAllRecipes(getRecipes());
     }
 
-    private List<Recipe> getRecipes() {
+    private Set<Recipe> getRecipes() {
 
-        List<Recipe> recipes = new ArrayList<>(1);
+        Set<Recipe> recipes = new HashSet<>(1);
 
         UnitOfMeasure eachUnitOfMeasure = unitOfMeasureServiceImpl.getUnitOfMeasureByDescription("Each");
         UnitOfMeasure tablespoonUnitOfMeasure = unitOfMeasureServiceImpl.getUnitOfMeasureByDescription("Tablespoon");
