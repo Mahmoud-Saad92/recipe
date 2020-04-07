@@ -5,6 +5,7 @@ import eg.bazinga.recipe.models.enums.Difficulty;
 import eg.bazinga.recipe.services.category.CategoryService;
 import eg.bazinga.recipe.services.recipe.RecipeService;
 import eg.bazinga.recipe.services.unitofmeasure.UnitOfMeasureService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private CategoryService categoryServiceImpl;
@@ -33,6 +35,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        log.debug("Context refreshed event fired, and all recipes is going to be saved");
+
         recipeServiceImpl.saveAllRecipes(getRecipes());
     }
 
@@ -58,8 +62,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.setDifficulty(Difficulty.Easy);
         guacRecipe.setDirections("");
 
-        guacRecipe.addCategory(americanCategory);
-        guacRecipe.addCategory(mexicanCategory);
+        guacRecipe.getCategories().add(americanCategory);
+        guacRecipe.getCategories().add(mexicanCategory);
 
         Notes guacNotes = new Notes();
         guacNotes.setRecipeNotes("");
